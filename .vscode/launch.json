@@ -10,6 +10,13 @@
             "request": "launch",
             "program": "naive_bayes.py",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: Logistic regression",
+            "type": "python",
+            "request": "launch",
+            "program": "logistic_regression.py",
+            "console": "integratedTerminal"
         }
     ]
 }
