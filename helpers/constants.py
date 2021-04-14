@@ -1,3 +1,5 @@
+DATASET_PATH = "data/dataset.xlsx"
+
 ALL_CLASSES = [
     "content discussion", "greeting", "logistics", "assignment instructions", "instruction question",
     "assignment question", "general comment", "response", "incomplete/typo", "feedback",

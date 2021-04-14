@@ -1,3 +1,4 @@
+import os
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -8,13 +9,13 @@ from sklearn.model_selection import KFold, cross_val_score
 import numpy as np
 from helpers.worksheet import read_worksheet
 from helpers.preprocess import preprocess_data
-from helpers.constants import ALL_CLASSES
+from helpers.constants import ALL_CLASSES, DATASET_PATH
 
 if __name__ == "__main__":
     le = preprocessing.LabelEncoder()
     le.fit(ALL_CLASSES)  # Encode classes with numerical labels
-    X, y = read_worksheet("dataset.xlsx", "Discussion only data", ALL_CLASSES, le, 10)
-    X2, y2 = read_worksheet("dataset.xlsx", "CREW data", ALL_CLASSES, le, 11)
+    X, y = read_worksheet(DATASET_PATH, "Discussion only data", ALL_CLASSES, le, 10)
+    X2, y2 = read_worksheet(DATASET_PATH, "CREW data", ALL_CLASSES, le, 11)
     X.extend(X2)  # Join worksheets into a single dataset
     y.extend(y2)
     X, y = preprocess_data(X, y)
