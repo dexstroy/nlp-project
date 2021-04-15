@@ -5,11 +5,12 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import make_pipeline
 from sklearn.metrics import accuracy_score
-from sklearn.model_selection import KFold, cross_val_score
-import numpy as np
+from sklearn.model_selection import KFold, cross_validate
 from helpers.worksheet import read_worksheet
 from helpers.preprocess import preprocess_data
 from helpers.constants import ALL_CLASSES, DATASET_PATH
+from helpers.scorers import scorers_dict, generate_report
+
 
 if __name__ == "__main__":
     le = preprocessing.LabelEncoder()
@@ -21,12 +22,12 @@ if __name__ == "__main__":
     X, y = preprocess_data(X, y)
 
     # Naive Bayes classifier pipeline
-    model = make_pipeline(TfidfVectorizer(sublinear_tf=True, use_idf=True, ngram_range=(1, 1)), MultinomialNB(alpha=.01))
+    model = make_pipeline(TfidfVectorizer(sublinear_tf=True, use_idf=True, ngram_range=(1, 2)), MultinomialNB(alpha=0.01))
 
     # Evaluate classifier using KFold cross validation
     kf = KFold(n_splits=5, shuffle=True, random_state=77)
-    scores = cross_val_score(model, X, y, scoring="accuracy", cv=kf, n_jobs=-1)
-    print("Accuracy: {} {}".format(np.mean(scores), np.std(scores)))
+    scores = cross_validate(model, X, y, scoring=scorers_dict, cv=kf, n_jobs=-1)
+    generate_report(scores)
 
     # Evaluate classifier with a single train/test dataset split
     # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=77)
