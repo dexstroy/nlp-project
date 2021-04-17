@@ -1,25 +1,16 @@
 import os
-from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.pipeline import make_pipeline
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import KFold, cross_validate
-from helpers.worksheet import read_worksheet
-from helpers.preprocess import preprocess_data
-from helpers.constants import ALL_CLASSES, DATASET_PATH
 from helpers.scorers import scorers_dict, generate_report
+from helpers.data import get_data
 
 
 if __name__ == "__main__":
-    le = preprocessing.LabelEncoder()
-    le.fit(ALL_CLASSES)  # Encode classes with numerical labels
-    X, y = read_worksheet(DATASET_PATH, "Discussion only data", ALL_CLASSES, le, 10)
-    X2, y2 = read_worksheet(DATASET_PATH, "CREW data", ALL_CLASSES, le, 11)
-    X.extend(X2)  # Join worksheets into a single dataset
-    y.extend(y2)
-    X, y = preprocess_data(X, y)
+    X, y = get_data()
 
     # Naive Bayes classifier pipeline
     model = make_pipeline(TfidfVectorizer(sublinear_tf=True, use_idf=True, ngram_range=(1, 2)), MultinomialNB(alpha=0.01))
