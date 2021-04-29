@@ -1,6 +1,7 @@
 from sklearn import preprocessing
-from helpers.constants import ALL_CLASSES, DATASET_PATH
+from helpers.constants import ALL_CLASSES, DATASET_PATH, STORIES_PATH
 from helpers.worksheet import read_worksheet
+from helpers.stories import read_stories
 from helpers.preprocess import preprocess_data
 
 
@@ -11,4 +12,9 @@ def get_data():
     X2, y2 = read_worksheet(DATASET_PATH, "CREW data", ALL_CLASSES, le, 11)
     X.extend(X2)  # Join worksheets into a single dataset
     y.extend(y2)
+
+    # include stories as content discussion
+    X_s, y_s = read_stories(STORIES_PATH, le)
+    X.extend(X_s)
+    y.extend(y_s)
     return preprocess_data(X, y)
