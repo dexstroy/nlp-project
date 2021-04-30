@@ -17,7 +17,7 @@ def read_worksheet(filename, sheet_name, all_classes, group_mapper, label_encode
         for i in range(no_columns):
             new_entry[column_labels[i].value.lower().replace(" ", "_")] = str(row[i].value)
         c_list = [new_entry["codepreliminary"].lower().strip()]
-        if c_list[0] not in all_classes:
+        if c_list[0] not in all_classes and c_list[0] not in group_mapper.keys():
             c_list = new_entry["codepreliminary"].lower().strip().split("/")
         # if still not belongs to any of classes then belongs to some group class
         if c_list[0] not in all_classes:
