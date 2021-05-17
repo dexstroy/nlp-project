@@ -21,7 +21,7 @@ def count_emoji(message):
     return counter
 
 
-def count_question_pronouns(message):
+def count_interrogative_words(message):
     pronouns = ["who", "what", "when", "where", "why", "how", "when"]
     counter = 0
     for p in pronouns:
@@ -40,7 +40,7 @@ def get_custom_features(dataset, classes):
     new_classes = []
     stopword_set = stopwords.words("english")
     for i, entry in enumerate(dataset):
-        exp.expand(entry)
+        entry, contractions = exp.expand(entry)
         new_entry = []
         features = []
         tokens = tkn.tokenize(entry)
@@ -58,8 +58,9 @@ def get_custom_features(dataset, classes):
         # Number of URLs in a message and normalize with number of tokens
         features.append(count_url(lower_entry) / features[1])
         # Number of question pronouns: who, what... and normalize
-        features.append(count_question_pronouns(lower_entry) / features[1])
+        features.append(count_interrogative_words(lower_entry) / features[1])
         features.append(count_emoji(lower_entry) / features[0])
+        features.append(contractions)
 
         # Remove capitalization, stopwords
         for token in tokens:

@@ -20,6 +20,8 @@ class Expander(object):
 
     def expand(self, text):
         s = text
+        count = 0
         for (pattern, repl) in self.patterns:
-            s = re.sub(pattern, repl, s)
-        return s
+            s, n = re.subn(pattern, repl, s)
+            count += n
+        return s, count
