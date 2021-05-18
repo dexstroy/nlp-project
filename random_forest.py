@@ -1,18 +1,26 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.pipeline import make_pipeline
+from sklearn.pipeline import make_pipeline, FeatureUnion
 from sklearn.model_selection import KFold, cross_validate
 from sklearn.ensemble import RandomForestClassifier
 from helpers.scorers import scorers_dict, generate_report
-from helpers.data import get_data
+from helpers.data import get_data, get_data_with_features, ExtractColumn
 
 
-if __name__ == "__main__":
-    X, y = get_data()
+def random_forest_classifier(use_stories=False, use_custom_features=False):
 
+    if use_custom_features:
+        # Use TF-IDF together with custom features
+        X, y = get_data_with_features(include_stories=use_stories)
 
-    RF_classifier = RandomForestClassifier()
+        tfidf_pipe = make_pipeline(ExtractColumn(0), TfidfVectorizer(sublinear_tf=True, use_idf=True))
+        custom_pipe = make_pipeline(ExtractColumn(1))
 
-    model = make_pipeline(TfidfVectorizer(sublinear_tf=True, use_idf=True, ngram_range=(1, 2)), RF_classifier)
+        model = make_pipeline(FeatureUnion([("tfidf", tfidf_pipe), ("custom_features", custom_pipe)]),
+                              RandomForestClassifier())
+    else:
+        X, y = get_data(include_stories=use_stories)
+
+        model = make_pipeline(TfidfVectorizer(sublinear_tf=True, use_idf=True, ngram_range=(1, 2)), RandomForestClassifier())
 
     # Evaluate classifier using KFold cross validation
     kf = KFold(n_splits=5, shuffle=True, random_state=77)

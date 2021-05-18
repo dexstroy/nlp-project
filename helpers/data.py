@@ -34,3 +34,14 @@ def get_data_with_features(include_stories=False):
         X.extend(X_s)
         y.extend(y_s)
     return get_custom_features(X, y)
+
+
+class ExtractColumn(object):
+    def __init__(self, i):
+        self.i = i
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        return [x[self.i] for x in X]
