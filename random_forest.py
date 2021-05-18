@@ -7,7 +7,6 @@ from helpers.data import get_data, get_data_with_features, ExtractColumn
 
 
 def random_forest_classifier(use_stories=False, use_custom_features=False):
-
     if use_custom_features:
         # Use TF-IDF together with custom features
         X, y = get_data_with_features(include_stories=use_stories)

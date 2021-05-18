@@ -7,7 +7,6 @@ from helpers.data import get_data, get_data_with_features, ExtractColumn
 
 
 def naive_bayes_classifier(use_stories=False, use_custom_features=False):
-
     if use_custom_features:
         # Use TF-IDF together with custom features
         X, y = get_data_with_features(include_stories=use_stories)
@@ -30,4 +29,3 @@ def naive_bayes_classifier(use_stories=False, use_custom_features=False):
     kf = KFold(n_splits=5, shuffle=True, random_state=77)
     scores = cross_validate(model, X, y, scoring=scorers_dict, cv=kf, n_jobs=-1)
     generate_report(scores)
-
