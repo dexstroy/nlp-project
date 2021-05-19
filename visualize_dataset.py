@@ -3,6 +3,7 @@ from helpers.worksheet import read_worksheet
 from helpers.constants import ALL_CLASSES, DATASET_PATH
 from collections import Counter, OrderedDict
 import matplotlib.pyplot as plt
+from statistics import mean
 
 def get_dataset():
     # initialize label encoder
@@ -41,6 +42,29 @@ def class_distributions(X, y):
     plt.xlabel('Class')
     plt.ylabel('Number of messages in class')
 
+def average_message_length(X, y):
+    class_message_lengths = {}
+    for c in ALL_CLASSES:
+        class_message_lengths[c] = []
+    
+    for idx, row in enumerate(X):
+        class_message_lengths[ALL_CLASSES[y[idx]]].append(len(row['message']))
+
+    class_message_average_lengths = {}
+    for key in class_message_lengths:
+        class_message_average_lengths[key] = mean(class_message_lengths[key])
+    
+    c = OrderedDict(sorted(class_message_average_lengths.items(), reverse=True, key=lambda x: x[1]))
+
+    fig = plt.figure()
+    fig.subplots_adjust(bottom=0.245)
+    plt.xticks(rotation=90)
+    plt.title('Average length of messages in all classes')
+    plt.bar(c.keys(), c.values())
+    plt.xlabel('Class')
+    plt.ylabel('Message length')
+    
+
 if __name__ == "__main__":
     # configure plot settings
     plt.rcParams.update({
@@ -56,6 +80,7 @@ if __name__ == "__main__":
     # prepare visualizations
     most_active_students(X, y)
     class_distributions(X, y)
+    average_message_length(X, y)
 
     # show visualizations
     plt.show()
