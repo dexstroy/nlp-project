@@ -5,18 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Naive Bayes",
+            "name": "Python: run classifier",
             "type": "python",
             "request": "launch",
-            "program": "naive_bayes.py",
-            "console": "integratedTerminal"
-        },
-        {
-            "name": "Python: Logistic regression",
-            "type": "python",
-            "request": "launch",
-            "program": "logistic_regression.py",
-            "console": "integratedTerminal"
+            "program": "run_classifier.py",
+            "console": "integratedTerminal",
+            "args": [
+                "-classifier", "regression",
+                "-use_custom_features",
+                "-use_stories"
+            ]
         }
     ]
 }

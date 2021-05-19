@@ -64,7 +64,8 @@ def get_custom_features(dataset, classes):
 
         # Remove capitalization, stopwords
         for token in tokens:
-            new_token = ps.stem(token, True)  # Stem the token and convert to lowercase
+            token = token.lower()
+            new_token = ps.stem(token)  # Stem the token
             if new_token.startswith("http"):
                 new_token = "url"  # Replace links with a url tag
             if any(emoji in new_token for emoji in emojis):
