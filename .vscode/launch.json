@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: run classifier",
+            "name": "Python: run classifiers",
             "type": "python",
             "request": "launch",
             "program": "run_classifier.py",
@@ -15,6 +15,13 @@
                 "-use_custom_features",
                 "-use_stories"
             ]
+        },
+        {
+            "name": "Python: dataset visualization",
+            "type": "python",
+            "request": "launch",
+            "program": "visualize_dataset.py",
+            "console": "integratedTerminal"
         }
     ]
 }
