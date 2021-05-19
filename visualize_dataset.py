@@ -1,8 +1,10 @@
 from sklearn import preprocessing
 from helpers.worksheet import read_worksheet
 from helpers.constants import ALL_CLASSES, DATASET_PATH
+from collections import Counter, OrderedDict
+import matplotlib.pyplot as plt
 
-if __name__ == "__main__":
+def get_dataset():
     # initialize label encoder
     le = preprocessing.LabelEncoder()
     le.fit(ALL_CLASSES)
@@ -14,3 +16,33 @@ if __name__ == "__main__":
     # join worksheets into a single dataset
     X.extend(X2)
     y.extend(y2)
+
+    return X, y
+
+def most_active_students(X, y):
+    c = Counter(map(lambda x: x['pseudonym'], X))
+    c = OrderedDict(c.most_common(10))
+
+    plt.figure()
+    plt.title('Students with most number of messages')
+    plt.bar(c.keys(), c.values())
+    plt.xlabel('Student pseudonym')
+    plt.ylabel('Number of sent messages')
+
+if __name__ == "__main__":
+    # configure plot settings
+    plt.rcParams.update({
+        'axes.titlesize': 'xx-large',
+        'axes.labelsize': 'x-large',
+        'xtick.labelsize':'large',
+        'ytick.labelsize':'large'
+    })
+
+    # get dataset
+    X, y = get_dataset()
+
+    # prepare visualizations
+    most_active_students(X, y)
+
+    # show visualizations
+    plt.show()
