@@ -29,6 +29,18 @@ def most_active_students(X, y):
     plt.xlabel('Student pseudonym')
     plt.ylabel('Number of sent messages')
 
+def class_distributions(X, y):
+    c = Counter(map(lambda x: ALL_CLASSES[x], y))
+    c = OrderedDict(c.most_common())
+    
+    fig = plt.figure()
+    fig.subplots_adjust(bottom=0.245)
+    plt.xticks(rotation=90)
+    plt.title('Message class distribution')
+    plt.bar(c.keys(), c.values())
+    plt.xlabel('Class')
+    plt.ylabel('Number of messages in class')
+
 if __name__ == "__main__":
     # configure plot settings
     plt.rcParams.update({
@@ -43,6 +55,7 @@ if __name__ == "__main__":
 
     # prepare visualizations
     most_active_students(X, y)
+    class_distributions(X, y)
 
     # show visualizations
     plt.show()
