@@ -19,4 +19,4 @@ To classify the messages with traditional classifications techniques (random for
 To classify the messages with BERT model, run `bert.ipynb` on local server or access it in [Google Colab](https://colab.research.google.com/drive/1leHD3ptQg8NOd-YoN4FGleYOKCwEZ8CL?usp=sharing). Be sure to run it on **GPU** (navigate to Edit->Notebook Settings and select GPU from the Hardware Acceleration dropdown).
 
 ### Visualization of the dataset
-TODO: create a separate script for visualization of results.
+Run `python visualize_dataset.py`.
