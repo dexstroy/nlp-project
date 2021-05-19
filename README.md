@@ -20,3 +20,6 @@ To classify the messages with BERT model, run `bert.ipynb` on local server or ac
 
 ### Visualization of the dataset
 Run `python visualize_dataset.py`.
+
+## Repository structure
+TODO
