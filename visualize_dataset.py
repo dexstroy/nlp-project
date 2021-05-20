@@ -62,7 +62,7 @@ def average_message_length(X, y):
     plt.title('Average length of messages in all classes')
     plt.bar(c.keys(), c.values())
     plt.xlabel('Class')
-    plt.ylabel('Message length')
+    plt.ylabel('Average message length')
     
 
 if __name__ == "__main__":
