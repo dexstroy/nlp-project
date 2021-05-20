@@ -1,6 +1,6 @@
 from sklearn import preprocessing
 from helpers.worksheet import read_worksheet
-from helpers.constants import ALL_CLASSES, DATASET_PATH
+from helpers.constants import ALL_CLASSES, DATASET_PATH, GROUP_MAPPER
 from collections import Counter, OrderedDict
 import matplotlib.pyplot as plt
 from statistics import mean
@@ -11,8 +11,8 @@ def get_dataset():
     le.fit(ALL_CLASSES)
 
     # load worksheets - include all columns
-    X, y = read_worksheet(DATASET_PATH, "Discussion only data", ALL_CLASSES, le, 10, only_messages=False)
-    X2, y2 = read_worksheet(DATASET_PATH, "CREW data", ALL_CLASSES, le, 11, only_messages=False)
+    X, y = read_worksheet(DATASET_PATH, "Discussion only data", ALL_CLASSES, le, 10, GROUP_MAPPER, False, only_messages=False)
+    X2, y2 = read_worksheet(DATASET_PATH, "CREW data", ALL_CLASSES, le, 11, GROUP_MAPPER, False, only_messages=False)
     
     # join worksheets into a single dataset
     X.extend(X2)

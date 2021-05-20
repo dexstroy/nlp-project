@@ -12,3 +12,31 @@ STORIES_PATH = [
     "data/S2.txt",
     "data/S3.txt",
 ]
+
+GROUP_CLASSES = [
+    "general_conversation",
+    "task_discussion",
+    "directly_related_content"
+]
+
+GROUP_MAPPER ={
+    "opening statement": "general_conversation",
+    "general discussion": "general_conversation",
+    "greeting": "general_conversation",
+    "emoticon/non-verbal": "general_conversation",
+    "incomplete/typo": "general_conversation",
+    "general comment": "general_conversation",
+    "discussion wrap-up": "general_conversation",
+    "general question": "general_conversation",
+    "feedback": "general_conversation",
+    "outside material": "general_conversation",
+
+    "logistics": "task_discussion",
+    "assignment instructions": "task_discussion",
+    "instruction question": "task_discussion",
+    "assignment question": "task_discussion",
+
+    "content question": "directly_related_content",
+    "content discussion": "directly_related_content",
+    "response": "directly_related_content"
+}

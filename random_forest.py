@@ -6,10 +6,10 @@ from helpers.scorers import scorers_dict, generate_report
 from helpers.data import get_data, get_data_with_features, ExtractColumn
 
 
-def random_forest_classifier(use_stories=False, use_custom_features=False):
+def random_forest_classifier(use_stories=False, use_custom_features=False, use_class_grouping=False):
     if use_custom_features:
         # Use TF-IDF together with custom features
-        X, y = get_data_with_features(include_stories=use_stories)
+        X, y = get_data_with_features(include_stories=use_stories, use_class_grouping=use_class_grouping)
 
         tfidf_pipe = make_pipeline(ExtractColumn(0), TfidfVectorizer(sublinear_tf=True, use_idf=True))
         custom_pipe = make_pipeline(ExtractColumn(1))
@@ -17,7 +17,7 @@ def random_forest_classifier(use_stories=False, use_custom_features=False):
         model = make_pipeline(FeatureUnion([("tfidf", tfidf_pipe), ("custom_features", custom_pipe)]),
                               RandomForestClassifier())
     else:
-        X, y = get_data(include_stories=use_stories)
+        X, y = get_data(include_stories=use_stories, use_class_grouping=use_class_grouping)
 
         model = make_pipeline(TfidfVectorizer(sublinear_tf=True, use_idf=True, ngram_range=(1, 2)), RandomForestClassifier())
 
