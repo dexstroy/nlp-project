@@ -25,4 +25,13 @@ If you're running it locally the variable `DATASET_PATH` should point to the dat
 Run `python visualize_dataset.py`.
 
 ## Repository structure
-TODO
+- folder `.vscode` contains debug configuration if project is run using Visual Studio Code
+- folder `data` contains dataset and stories
+- folder `helpers` contains utility classes and functions (tokenization, preprocessing, worksheet helpers, constants, ...)
+- folder `report` contains final report
+- `bert.ipynb` is Python notebook which contains code for running BERT model locally or in Google Colab
+- `logistic_regression.py` contains code for classifying messages with logistic regression
+- `naive_bayes.py` contains code for classifying messages with naive Bayes
+- `random_forest.py` contains code for classifying messages with random forest
+- `run_classifier.py` is main file used to trigger any method of classification (logistic regression, naive Bayes and random forest)
+- `visualize_dataset.py` is used to draw plots of basic dataset statistics
