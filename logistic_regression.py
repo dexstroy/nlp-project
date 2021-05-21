@@ -26,4 +26,3 @@ def logistic_regression_classifier(use_stories=False, use_custom_features=False,
     kf = KFold(n_splits=5, shuffle=True, random_state=77)
     scores = cross_validate(model, X, y, scoring=scorers_dict, cv=kf, n_jobs=-1)
     generate_report(scores)
-
