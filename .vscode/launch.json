@@ -13,7 +13,8 @@
             "args": [
                 "-classifier", "regression",
                 "-use_custom_features",
-                "-use_stories"
+                "-use_stories",
+                "-use_class_grouping"
             ]
         },
         {
