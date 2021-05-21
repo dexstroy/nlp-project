@@ -16,7 +16,7 @@ To classify the messages with traditional classifications techniques (random for
 1. `<classifier_name>` can be one of: `forest`, `bayes`, `regression`
 2. `-use_custom_features` is *optional* flag which indicates the use of custom features (number of URLs, number of punctuations, number of emojis, ...)
 3. `-use_stories` is *optional* flag which indicates that stories are also used to help with classification. Content of the stories is treated as *content discussion* class.
-4. `-use_class_grouping` is *optional* flag which indicates that classes are grouped. Look at helper/constants.py to see default class grouping.
+4. `-use_class_grouping` is *optional* flag which indicates that classes are grouped. Look at `helper/constants.py` to see default class grouping.
 
 To classify the messages with BERT model, run `bert.ipynb` on local server or access it in [Google Colab](https://colab.research.google.com/drive/1leHD3ptQg8NOd-YoN4FGleYOKCwEZ8CL?usp=sharing). Be sure to run it on **GPU** (navigate to Edit->Notebook Settings and select GPU from the Hardware Acceleration dropdown). When running on Google Colab, upload the dataset in the same folder as the notebook file.
 If you're running it locally the variable `DATASET_PATH` should point to the dataset inside `data` folder (uncomment the line `DATASET_PATH = "data/dataset.xlsx"`).
