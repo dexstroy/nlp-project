@@ -1,8 +1,8 @@
 # reads stories and classifies them as content discussion
-def read_stories(stories_path, label_encoder):
+def read_stories(stories_path, label_encoder, group_mapper, grouping):
     X = []
     y = []
-    cd_code = label_encoder.transform(["content discussion"])[0]
+    cd_code = label_encoder.transform([group_mapper["content discussion"] if grouping else "content discussion"])[0]
 
     for story_path in stories_path:
         story = open(story_path, 'r')

@@ -15,7 +15,7 @@ def get_data(include_stories=False, use_class_grouping=False):
     y.extend(y2)
     if include_stories:
         # include stories as content discussion
-        X_s, y_s = read_stories(STORIES_PATH, le)
+        X_s, y_s = read_stories(STORIES_PATH, le, GROUP_MAPPER, use_class_grouping)
         X.extend(X_s)
         y.extend(y_s)
     return preprocess_data(X, y)
@@ -30,7 +30,7 @@ def get_data_with_features(include_stories=False, use_class_grouping=False):
     y.extend(y2)
     if include_stories:
         # include stories as content discussion
-        X_s, y_s = read_stories(STORIES_PATH, le)
+        X_s, y_s = read_stories(STORIES_PATH, le, GROUP_MAPPER, use_class_grouping)
         X.extend(X_s)
         y.extend(y_s)
     return get_custom_features(X, y)
